@@ -24,11 +24,18 @@ class Rock extends Thing implements Displayable{
 }
 
 public class LivingRock extends Rock implements Moveable {
+  int change = 10;
+  
   LivingRock(float x, float y) {
     super(x,y);
   }
   void move() {
-    /* ONE PERSON WRITE THIS */
+    x += change;
+    y += change;
+    if (x > width || y > height || x < 0 || y < 0) {
+      change *= -1;
+    }
+    translate(x,y);
   }
 }
 
@@ -47,6 +54,7 @@ class Ball extends Thing implements Displayable, Moveable {
   }
   void mousepressed(){
     ellipse(mouseX, mouseY, 33, 33);
+  }
 }
 ArrayList<Displayable> thingsToDisplay;
 ArrayList<Moveable> thingsToMove;

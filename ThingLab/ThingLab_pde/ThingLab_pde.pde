@@ -52,10 +52,12 @@ class Ball extends Thing implements Moveable {
     ellipse(500, 400, 50, 50);
   }
   void move() {
-    ellipse(x + 1, y + 1, 33, 33);
+    x++;
+    y++;
   }
   void mousepressed(){
-    ellipse(mouseX, mouseY, 33, 33);
+    x = mouseX;
+    y = mouseY;
   }
 }
 ArrayList<Displayable> thingsToDisplay;

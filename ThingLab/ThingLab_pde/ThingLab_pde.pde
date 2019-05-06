@@ -25,11 +25,18 @@ class Rock extends Thing {
 }
 
 public class LivingRock extends Rock implements Moveable {
+  int Xchange = 10;
+  int Ychange = 0;
+  
   LivingRock(float x, float y) {
     super(x, y);
   }
   void move() {
-    /* ONE PERSON WRITE THIS */
+    x += Xchange;
+    y += Ychange;
+    Xchange -= 10;
+    Ychange += 10;
+    translate(x,y);
   }
 }
 
@@ -47,10 +54,12 @@ class Ball extends Thing implements Moveable {
     image(ball, x, y, 50, 50);
   }
   void move() {
-    ellipse(x + 1, y + 1, 33, 33);
+    x++;
+    y++;
   }
   void mousepressed(){
-    ellipse(mouseX, mouseY, 33, 33);
+    x = mouseX;
+    y = mouseY;
   }
 }
 ArrayList<Displayable> thingsToDisplay;

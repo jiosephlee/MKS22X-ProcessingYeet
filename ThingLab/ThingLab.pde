@@ -18,8 +18,11 @@ class Rock extends Thing implements Displayable{
     super(x, y);
   }
 
-  void display() {  
-      /* ONE PERSON WRITE THIS */
+  float ran1 = random(20) + 30;
+  float ran2 = random(20) + 30;
+  void display() { 
+      fill(150); 
+      ellipse(x, y, ran1, ran2);
   }
 }
 
@@ -80,5 +83,4 @@ void draw() {
   for (Moveable thing : thingsToMove) {
     thing.move();
   }
-}
 }

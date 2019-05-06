@@ -4,22 +4,23 @@ interface Displayable {
 interface Moveable {
   void move();
 }
-class Thing {
+abstract class Thing implements Displayable {
   float x, y;
 
   Thing(float x, float y) {
     this.x = x;
     this.y = y;
   }
+  abstract void display();
 }
 
-class Rock extends Thing implements Displayable{
+class Rock extends Thing {
   Rock(float x, float y) {
     super(x, y);
   }
 
-  void display() {  
-      /* ONE PERSON WRITE THIS */
+  void display() {
+    /* ONE PERSON WRITE THIS */
   }
 }
 
@@ -28,7 +29,7 @@ public class LivingRock extends Rock implements Moveable {
   int Ychange = 0;
   
   LivingRock(float x, float y) {
-    super(x,y);
+    super(x, y);
   }
   void move() {
     x += Xchange;
@@ -39,16 +40,17 @@ public class LivingRock extends Rock implements Moveable {
   }
 }
 
-class Ball extends Thing implements Displayable, Moveable {
+class Ball extends Thing implements Moveable {
   Ball(float x, float y) {
 
     super(x, y);
   }
 
   void display() {
-    /* ONE PERSON WRITE THIS */
+    noStroke();
+    fill(255, 211, 250);
+    ellipse(500, 400, 50, 50);
   }
-
   void move() {
     ellipse(x + 1, y + 1, 33, 33);
   }
@@ -65,14 +67,14 @@ void setup() {
   thingsToDisplay = new ArrayList<Displayable>();
   thingsToMove = new ArrayList<Moveable>();
   for (int i = 0; i < 10; i++) {
-    Ball b = new Ball(50+random(width-100),50+random(height)-100);
+    Ball b = new Ball(50+random(width-100), 50+random(height-100));
     thingsToDisplay.add(b);
     thingsToMove.add(b);
-    Rock r = new Rock(50+random(width-100),50+random(height)-100);
+    Rock r = new Rock(50+random(width-100), 50+random(height-100));
     thingsToDisplay.add(r);
   }
 
-  LivingRock m = new LivingRock(50+random(width-100),50+random(height)-100);
+  LivingRock m = new LivingRock(50+random(width-100), 50+random(height-100));
   thingsToDisplay.add(m);
   thingsToMove.add(m);
 }

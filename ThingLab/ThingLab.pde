@@ -24,17 +24,17 @@ class Rock extends Thing implements Displayable{
 }
 
 public class LivingRock extends Rock implements Moveable {
-  int change = 10;
+  int Xchange = 10;
+  int Ychange = 0;
   
   LivingRock(float x, float y) {
     super(x,y);
   }
   void move() {
-    x += change;
-    y += change;
-    if (x > width || y > height || x < 0 || y < 0) {
-      change *= -1;
-    }
+    x += Xchange;
+    y += Ychange;
+    Xchange -= 10;
+    Ychange += 10;
     translate(x,y);
   }
 }

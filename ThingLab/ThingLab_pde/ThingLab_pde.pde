@@ -25,11 +25,18 @@ class Rock extends Thing {
 }
 
 public class LivingRock extends Rock implements Moveable {
+  int Xchange = 10;
+  int Ychange = 0;
+  
   LivingRock(float x, float y) {
     super(x, y);
   }
   void move() {
-    /* ONE PERSON WRITE THIS */
+    x += Xchange;
+    y += Ychange;
+    Xchange -= 10;
+    Ychange += 10;
+    translate(x,y);
   }
 }
 

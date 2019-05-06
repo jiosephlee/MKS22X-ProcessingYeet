@@ -47,23 +47,28 @@ class Ball extends Thing implements Moveable {
   }
 
   void display() {
+    /*
     noStroke();
     fill(255, 211, 250);
-    ellipse(500, 400, 50, 50);
+    ellipse(x, y, 50, 50);*/
+    image(ball, x, y, 50, 50);
   }
   void move() {
-    ellipse(x + 1, y + 1, 33, 33);
+    x++;
+    y++;
   }
   void mousepressed(){
-    ellipse(mouseX, mouseY, 33, 33);
+    x = mouseX;
+    y = mouseY;
   }
 }
 ArrayList<Displayable> thingsToDisplay;
 ArrayList<Moveable> thingsToMove;
+PImage ball;
 
 void setup() {
   size(1000, 800);
-
+  ball=loadImage("ball.png"); 
   thingsToDisplay = new ArrayList<Displayable>();
   thingsToMove = new ArrayList<Moveable>();
   for (int i = 0; i < 10; i++) {

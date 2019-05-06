@@ -39,15 +39,17 @@ class Ball extends Thing implements Displayable, Moveable {
   }
 
   void display() {
-    /* ONE PERSON WRITE THIS */
+    noStroke();
+    fill(255, 211, 250);
+    ellipse(500, 400, 50, 50);
   }
 
   void move() {
     ellipse(x + 1, y + 1, 33, 33);
   }
-  void mousepressed(){
-    ellipse(mouseX, mouseY, 33, 33);
-}
+  //void mousepressed(){
+   // ellipse(mouseX, mouseY, 33, 33);
+  }
 ArrayList<Displayable> thingsToDisplay;
 ArrayList<Moveable> thingsToMove;
 
@@ -78,4 +80,5 @@ void draw() {
   for (Moveable thing : thingsToMove) {
     thing.move();
   }
+}
 }

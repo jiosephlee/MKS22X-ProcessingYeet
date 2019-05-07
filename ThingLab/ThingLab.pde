@@ -24,10 +24,9 @@ class Rock extends Thing implements Displayable {
   
   
   void display() { 
-
       image(rock, x, y, 50, 50);
-   
   }
+  
 }
 
 public class LivingRock extends Rock implements Moveable {
@@ -40,12 +39,16 @@ public class LivingRock extends Rock implements Moveable {
     super(x, y);
   }
   
+   void display() { 
+      super.display();
+  }
+ 
+  float z= random(-10,10);
+  float g = random(-10,10);
+  
   void move() {
-    i++;
-    if (i == 4) i = 0;
-    x += xChanges[i];
-    y += yChanges[i];
-    translate(x, y);
+    x += z;
+    y += g;
   }
 }
 
@@ -63,12 +66,17 @@ class Ball extends Thing implements Displayable, Moveable {
   }
 
 
+
   float a = random(-5,5);
   float b = random(-5,5);
-  
+    
   void move() {
-    x += a;
-    y += b;
+    if ((x < 950) && (x > 50)){
+      x += a;
+    }
+    if ((y < 750) && (y > 50)){
+      y += b;
+    }
   }
 
 }

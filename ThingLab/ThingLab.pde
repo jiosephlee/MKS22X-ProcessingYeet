@@ -41,10 +41,12 @@ class Ball extends Thing implements Displayable, Moveable {
     super(x, y);
   }
 
-  void display() {
+    void display() {
+    /*
     noStroke();
     fill(255, 211, 250);
-    ellipse(500, 400, 50, 50);
+    ellipse(x, y, 50, 50);*/
+    image(ball, x, y, 50, 50);
   }
 
   void move() {
@@ -55,10 +57,11 @@ class Ball extends Thing implements Displayable, Moveable {
   }
 ArrayList<Displayable> thingsToDisplay;
 ArrayList<Moveable> thingsToMove;
+PImage ball;
 
 void setup() {
   size(1000, 800);
-
+  ball=loadImage("ball.png"); 
   thingsToDisplay = new ArrayList<Displayable>();
   thingsToMove = new ArrayList<Moveable>();
   for (int i = 0; i < 10; i++) {

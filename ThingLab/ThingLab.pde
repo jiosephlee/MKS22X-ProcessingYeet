@@ -21,10 +21,12 @@ class Rock extends Thing implements Displayable {
 
   float ran1 = random(20) + 30;
   float ran2 = random(20) + 30;
-
+  
+  
   void display() { 
-    fill(150); 
-    ellipse(x, y, ran1, ran2);
+
+      image(rock, x, y, 50, 50);
+   
   }
 }
 
@@ -37,6 +39,7 @@ public class LivingRock extends Rock implements Moveable {
   LivingRock(float x, float y) {
     super(x, y);
   }
+  
   void move() {
     i++;
     if (i == 4) i = 0;
@@ -59,9 +62,13 @@ class Ball extends Thing implements Displayable, Moveable {
     image(ball, x, y, 50, 50);
   }
 
+
+  float a = random(-5,5);
+  float b = random(-5,5);
+  
   void move() {
-    x++;
-    y++;
+    x += a;
+    y += b;
   }
 
 }
@@ -69,10 +76,14 @@ class Ball extends Thing implements Displayable, Moveable {
 ArrayList<Displayable> thingsToDisplay;
 ArrayList<Moveable> thingsToMove;
 PImage ball;
+PImage rock;
+PImage rockA;
 
 void setup() {
   size(1000, 800);
   ball=loadImage("ball.png"); 
+  rock=loadImage("rock.png");
+  rockA=loadImage("rock1.png"); 
   thingsToDisplay = new ArrayList<Displayable>();
   thingsToMove = new ArrayList<Moveable>();
   for (int i = 0; i < 10; i++) {

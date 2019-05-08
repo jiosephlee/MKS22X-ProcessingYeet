@@ -95,6 +95,8 @@ class Ball extends Thing implements Displayable, Moveable {
       y += b*direction;
     } else {
       direction+=-1;
+      x += a*direction;
+      y += b*direction;
     }
   }
 }

@@ -30,7 +30,7 @@ class Rock extends Thing implements Displayable {
 }
 
 public class LivingRock extends Rock implements Moveable {
-
+  float[] eyeColors = new float[] { random(0,255), random(0,255), random(0, 255) };
   int[] xChanges = new int[] { 5, 0, -10, 0 };
   int[] yChanges = new int[] { 0, 5, 0, -10 };
   int i = 0;
@@ -41,6 +41,12 @@ public class LivingRock extends Rock implements Moveable {
   
    void display() { 
       super.display();
+      fill(255);
+      ellipse(x+10,y+20,20,20);
+      ellipse(x+35,y+20,15,15);
+      fill(eyeColors[0],eyeColors[1],eyeColors[2]);
+      ellipse(x+10,y+20,10,10);
+      ellipse(x+35,y+20,10,10);
   }
  
   float z= random(-10,10);

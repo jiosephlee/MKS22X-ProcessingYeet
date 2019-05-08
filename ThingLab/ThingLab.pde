@@ -73,17 +73,56 @@ class Ball extends Thing implements Displayable, Moveable {
 
   float a = random(-5,5);
   float b = random(-5,5);
+  int direction=1;
     
   void move() {
-    if ((x < 950) && (x > 0)){
-      x += a;
-    }
-    if ((y < 750) && (y > 25)){
-      y += b;
-    }
+    if ((x < 950) && (x > 0) && (y < 750) && (y > 25)){
+      x += a*direction;
+      y += b*direction;
+    } else{
+      direction+=-1;
   }
 
 }
+
+class Ball extends Thing implements Displayable, Moveable {
+  Ball(float x, float y) {
+
+    super(x, y);
+  }
+  void display() {
+    /*
+    noStroke();
+     fill(255, 211, 250);
+     ellipse(x, y, 50, 50);*/
+    image(ball, x, y, 50, 50);
+  }
+
+
+
+  float a = random(-5,5);
+  float b = random(-5,5);
+    
+void move(){
+  if (!(x < 950) || !(x > 0)){
+        goingdown*=-1
+      }
+      if ((y < 750) && (y > 25)){
+        y += g;
+      }
+  if(goingown==1){
+  time++;
+  x+=0.2;
+  y = 1/2*9.81*time*time;
+  
+  time++;
+  x+=0.2;
+  y = 1/2*9.81*time*time;
+  }
+}
+
+}
+
 
 ArrayList<Displayable> thingsToDisplay;
 ArrayList<Moveable> thingsToMove;

@@ -53,8 +53,12 @@ public class LivingRock extends Rock implements Moveable {
   float g = random(-10,10);
   
   void move() {
-    x += z;
-    y += g;
+    if ((x < 950) && (x > 0)){
+      x += z;
+    }
+    if ((y < 750) && (y > 25)){
+      y += g;
+    }
   }
 }
 
@@ -77,10 +81,10 @@ class Ball extends Thing implements Displayable, Moveable {
   float b = random(-5,5);
     
   void move() {
-    if ((x < 950) && (x > 50)){
+    if ((x < 950) && (x > 0)){
       x += a;
     }
-    if ((y < 750) && (y > 50)){
+    if ((y < 750) && (y > 25)){
       y += b;
     }
   }

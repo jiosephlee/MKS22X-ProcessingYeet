@@ -41,6 +41,9 @@ public class LivingRock extends Rock implements Moveable {
   
    void display() { 
       super.display();
+      fill(255);
+      ellipse(x+10,y+20,20,20);
+      ellipse(x+35,y+20,15,15);
   }
  
   float z= random(-10,10);

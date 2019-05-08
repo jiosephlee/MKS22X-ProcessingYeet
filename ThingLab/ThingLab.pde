@@ -61,12 +61,17 @@ class Ball extends Thing implements Displayable, Moveable {
 
     super(x, y);
   }
+  
+  float r = random(255);
+  float g = random(255);
+  float bl = random(255);
+  
+  float size = random(30,50);
+  
   void display() {
-    /*
     noStroke();
-     fill(255, 211, 250);
-     ellipse(x, y, 50, 50);*/
-    image(ball, x, y, 50, 50);
+    fill(r, g, bl);
+    ellipse(x, y, size , size);
   }
 
 

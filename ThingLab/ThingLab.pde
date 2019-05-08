@@ -140,15 +140,12 @@ class Ball extends Thing implements Displayable, Moveable {
 
   ArrayList<Displayable> thingsToDisplay;
   ArrayList<Moveable> thingsToMove;
-  PImage ball;
   PImage rock;
-  PImage rockA;
+
 
   void setup() {
     size(1000, 800);
-    ball=loadImage("ball.png");
     rock=loadImage("rock.png");
-    rockA=loadImage("rock1.png");
     thingsToDisplay = new ArrayList<Displayable>();
     thingsToMove = new ArrayList<Moveable>();
     for (int i = 0; i < 10; i++) {

@@ -52,10 +52,10 @@ public class LivingRock extends Rock implements Moveable {
   float g = random(-10,10);
   
  void move() {
-    if ((x < 950) && (x > 50)){
+    if ((x < 950) && (x > 10)){
       x += z;
     }
-    if ((y < 750) && (y > 50)){
+    if ((y < 740) && (y > 10)){
       y += g;
     }
   }

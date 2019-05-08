@@ -23,33 +23,40 @@ class Rock extends Thing implements Displayable {
   float ran2 = random(20) + 30;
 
 
-  void display() { 
+  void display() {
     image(rock, x, y, 50, 50);
   }
 }
 
 public class LivingRock extends Rock implements Moveable {
-
+  float[] eyeColors = new float[] { random(0,255), random(0,255), random(0, 255) };
   int[] xChanges = new int[] { 5, 0, -10, 0 };
   int[] yChanges = new int[] { 0, 5, 0, -10 };
-  int i = 0;
 
   LivingRock(float x, float y) {
     super(x, y);
   }
 
-  void display() { 
-    super.display();
+
+   void display() {
+      super.display();
+      fill(255);
+      ellipse(x+10,y+20,20,20);
+      ellipse(x+35,y+20,15,15);
+      fill(eyeColors[0],eyeColors[1],eyeColors[2]);
+      ellipse(x+10,y+20,10,10);
+      ellipse(x+35,y+20,10,10);
   }
 
-  float z= random(-10, 10);
-  float g = random(-10, 10);
+  float z= random(-10,10);
+  float g = random(-10,10);
 
-  void move() {
-    if ((x < 950) && (x > 0)) {
+ void move() {
+    if ((x < 950) && (x > 10)){
       x += z;
     }
-    if ((y < 750) && (y > 25)) {
+    if ((y < 740) && (y > 10)){
+
       y += g;
     }
   }
@@ -60,12 +67,17 @@ class Ball extends Thing implements Displayable, Moveable {
 
     super(x, y);
   }
+
+  float r = random(255);
+  float g = random(255);
+  float bl = random(255);
+
+  float size = random(30,50);
+
   void display() {
-    /*
     noStroke();
-     fill(255, 211, 250);
-     ellipse(x, y, 50, 50);*/
-    image(ball, x, y, 50, 50);
+    fill(r, g, bl);
+    ellipse(x, y, size , size);
   }
 
 
@@ -131,9 +143,9 @@ class Ball extends Thing implements Displayable, Moveable {
 
   void setup() {
     size(1000, 800);
-    ball=loadImage("ball.png"); 
+    ball=loadImage("ball.png");
     rock=loadImage("rock.png");
-    rockA=loadImage("rock1.png"); 
+    rockA=loadImage("rock1.png");
     thingsToDisplay = new ArrayList<Displayable>();
     thingsToMove = new ArrayList<Moveable>();
     for (int i = 0; i < 10; i++) {

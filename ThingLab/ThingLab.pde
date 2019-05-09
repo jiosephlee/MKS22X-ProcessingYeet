@@ -47,22 +47,35 @@ public class LivingRock extends Rock implements Moveable {
     super(x, y);
   }
 
-
-   void display() {
+/*
+  void display() {
       image(rock, mouseX, mouseY, 50, 50);
       fill(255);
-      ellipse(mouseX-12, mouseY, 20, 20);
-      ellipse(mouseX+12, mouseY, 15, 15);
+      ellipse(mouseX+10, mouseY+20, 20, 20);
+      ellipse(mouseX+35, mouseY+20, 15, 15);
       fill(eyeColors[0],eyeColors[1],eyeColors[2]);
-      ellipse(mouseX-12, mouseY, 10, 10);
-      ellipse(mouseX+12, mouseY, 10, 10);
+      ellipse(mouseX+10, mouseY+20, 10, 10);
+      ellipse(mouseX+35, mouseY+20, 10, 10);
       fill(0);
-      ellipse(mouseX+2, mouseY, 7, 7);
-      ellipse(mouseX-2, mouseY, 7, 7);
+      ellipse(mouseX+12, mouseY+20, 7, 7);
+      ellipse(mouseX+33, mouseY+20, 7, 7);
+  }*/
+  
+  void display() {
+      super.display();
+      fill(255);
+      ellipse(x+10,y+20,20,20);
+      ellipse(x+35,y+20,15,15);
+      fill(eyeColors[0],eyeColors[1],eyeColors[2]);
+      ellipse(x+10,y+20,10,10);
+      ellipse(x+35,y+20,10,10);
+      fill(0);
+      ellipse(x+12,y+20,7,7);
+      ellipse(x+33,y+20,7,7);
   }
 
-  float z= random(-10,10);
-  float g = random(-10,10);
+  float z= random(0,10);
+  float g = random(0,10);
 
  void move() {
     /*if ((x < 950) && (x > 10)){
@@ -72,7 +85,23 @@ public class LivingRock extends Rock implements Moveable {
 
       y += g;
     }*/
-    //if touching thing should go here but I don't know which other thing to use?
+    if ((x < 950) && (x > 10)){
+      if (mouseX > x){
+        x += z;
+      }   
+      else{
+        x -= z;
+      }
+    }
+    if ((y < 740) && (y > 10)){
+      if (mouseY > y){
+        y += z;
+      }
+      else{
+        y -= z;
+      }
+    }
+    //if touching thing should go here for collisions but I don't know which other thing to use?
   }
 }
 

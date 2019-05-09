@@ -144,9 +144,17 @@ class Ball extends Thing implements Displayable, Moveable {
 }
 
   class EarthBall extends Thing implements Displayable, Moveable {
+    int time;
+    boolean goingdown;
+    int direction;
+    int velocity;
     EarthBall(float x, float y) {
-
+  
       super(x, y);
+      time = millis();
+      goingdown = true;
+      direction = 1;
+      velocity=0;
     }
     void display() {
       noStroke();
@@ -154,27 +162,25 @@ class Ball extends Thing implements Displayable, Moveable {
       ellipse(x, y, 50, 50);
     }
 
-
-
     float a = random(-5, 5);
     float b = random(-5, 5);
-    int goingdown = 1;
-    int time = 1;
     void move() {
       if (!(x < 950) || !(x > 0)) {
-        goingdown*=-1;
+        direction*=1;
       }
-      if ((y < 750) && (y > 25)) {
-        y += a;
+      if (y > 750) {
+        goingdown=true;
+        velocity=0;
       }
-      if (goingdown==1) {
-        time++;
-        x+=0.2;
-        y = 1/2*9.81*time*time;
-
-        time++;
-        x+=0.2;
-        y = 1/2*9.81*time*time;
+      if (goingdown==true) {
+        x+=0.2*direction;
+        velocity+=9.81*
+        y+=velocity
+        time=millis();
+      } else{
+        time+=0.1;
+        x+=0.2*direction;
+        y = 750 - 1/2*9.81*time*time;
       }
     }
   }

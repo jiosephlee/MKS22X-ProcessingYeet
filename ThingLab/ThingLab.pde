@@ -32,7 +32,7 @@ class Rock extends Thing implements Displayable, Collideable{
   boolean isTouching(Thing other){
    if (other.x <= (this.x + 25) && other.x >= (this.x - 25) 
        && other.y <= (this.y + 25) && other.y >= (this.y - 25)){
-        return true; 
+       return true; 
    }
    return false;
   }
@@ -49,29 +49,30 @@ public class LivingRock extends Rock implements Moveable {
 
 
    void display() {
-      super.display();
+      image(rock, mouseX, mouseY, 50, 50);
       fill(255);
-      ellipse(x+10,y+20,20,20);
-      ellipse(x+35,y+20,15,15);
+      ellipse(mouseX-12, mouseY, 20, 20);
+      ellipse(mouseX+12, mouseY, 15, 15);
       fill(eyeColors[0],eyeColors[1],eyeColors[2]);
-      ellipse(x+10,y+20,10,10);
-      ellipse(x+35,y+20,10,10);
+      ellipse(mouseX-12, mouseY, 10, 10);
+      ellipse(mouseX+12, mouseY, 10, 10);
       fill(0);
-      ellipse(x+12,y+20,7,7);
-      ellipse(x+33,y+20,7,7);
+      ellipse(mouseX+2, mouseY, 7, 7);
+      ellipse(mouseX-2, mouseY, 7, 7);
   }
 
   float z= random(-10,10);
   float g = random(-10,10);
 
  void move() {
-    if ((x < 950) && (x > 10)){
+    /*if ((x < 950) && (x > 10)){
       x += z;
     }
     if ((y < 740) && (y > 10)){
 
       y += g;
-    }
+    }*/
+    //if touching thing should go here but I don't know which other thing to use?
   }
 }
 

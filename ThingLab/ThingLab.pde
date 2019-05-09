@@ -4,6 +4,9 @@ interface Displayable {
 interface Moveable {
   void move();
 }
+interface Collideable {
+  boolean isTouching(Thing other);
+}
 class Thing {
   float x, y;
 
@@ -13,7 +16,7 @@ class Thing {
   }
 }
 
-class Rock extends Thing implements Displayable {
+class Rock extends Thing implements Displayable, Collideable{
   Rock(float x, float y) {
     super(x, y);
   }
@@ -25,6 +28,13 @@ class Rock extends Thing implements Displayable {
 
   void display() {
     image(rock, x, y, 50, 50);
+  }
+  boolean isTouching(Thing other){
+   if (other.x <= (this.x + 25) && other.x >= (this.x - 25) 
+       && other.y <= (this.y + 25) && other.y >= (this.y - 25)){
+        return true; 
+   }
+   return false;
   }
 }
 

@@ -101,7 +101,7 @@ class Ball extends Thing implements Displayable, Moveable {
   
   Ball(float x, float y) {
     super(x, y);
-    velocity = (int)random(4) + 2;
+    velocity = (int)random(2) + 2;
     vx = random(velocity-1)+1;
     vy = velocity*velocity - (vx*vx);
     if(random(1) < 0.5){
@@ -167,16 +167,9 @@ class BBall extends Ball implements Displayable, Moveable {
 
 class EarthBall extends Ball implements Displayable, Moveable {
   int time;
-  boolean goingdown;
-  int direction;
-  int velocity;
   EarthBall(float x, float y) {
-
     super(x, y);
     time = millis();
-    goingdown = true;
-    direction = 1;
-    velocity=0;
   }
   void display() {
     noStroke();
@@ -184,16 +177,16 @@ class EarthBall extends Ball implements Displayable, Moveable {
     ellipse(x, y, 50, 50);
   }
 
-  float a = random(-5, 5);
-  float b = random(-5, 5);
   void move() {
-    if (!(x < 950) || !(x > 0)) {
-      direction*=1;
+    if((x > 970) || (x < 20)){
+      dirx*=-1;
+    } else if ((y > 770) || (y < 30)) {
+      diry*=-1;
+    } else{
+      x += vx * dirx;
+      y += vy * diry;
     }
-    if (y > 750) {
-      goingdown=true;
-      velocity=0;
-    }
+    
     if (goingdown==true) {
       x+=0.2*direction;
       velocity+=9.81;
@@ -217,10 +210,10 @@ void setup() {
   thingsToDisplay = new ArrayList<Displayable>();
   thingsToMove = new ArrayList<Moveable>();
   for (int i = 0; i < 10; i++) {
-    BBall b = new BBall(50+random(width-100), 50+random(height)-100);
+    BBall b = new BBall(50+random(width-110), 50+random(height-110));
     thingsToDisplay.add(b);
     thingsToMove.add(b);
-    Rock r = new Rock(60+random(width-100), 60+random(height)-100);
+    Rock r = new Rock(50+random(width-110), 50+random(height-110));
     thingsToDisplay.add(r);
   }
 

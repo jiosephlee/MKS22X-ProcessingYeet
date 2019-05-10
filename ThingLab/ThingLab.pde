@@ -114,9 +114,6 @@ class Ball extends Thing implements Displayable, Moveable {
     } else{
       diry = -1;
     }
-    System.out.println("vx :" + vx);
-    System.out.println("vy:" + vy);
-    System.out.println("dirx, diry" + dirx + "," + diry);
   }
 
   float r = random(255);
@@ -132,11 +129,11 @@ class Ball extends Thing implements Displayable, Moveable {
   }
 
   void move() {
-    if((x > 970) || (x < 20)){
+    if((x > 960) || (x < 20)){
       dirx*=-1;
       x += vx * dirx;
       y += vy * diry;
-    } else if ((y > 770) || (y < 30)) {
+    } else if ((y > 760) || (y < 20)) {
       diry*=-1;
       x += vx * dirx;
       y += vy * diry;
@@ -171,7 +168,7 @@ class EarthBall extends Ball implements Displayable, Moveable {
     super(x, y);
     vy = 0;
     vx = 1;
-    diry = 1;
+    diry = -1;
     time = millis();
   }
   void display() {
@@ -181,29 +178,29 @@ class EarthBall extends Ball implements Displayable, Moveable {
   }
 
   void move() {
-    if((x > 970) || (x < 20)){
+    if((x > 960) || (x < 20)){
       dirx*=-1;
-      velocity+=9.81 * (millis()-time) * 10;
+      velocity+=9.81 * (millis()-time) / 1000;
       x += vx * dirx;
       y += vy * diry;
       time = millis();
-    } else if ((y > 770) || (y < 30) || vy <= 0) {
+    } else if ((y > 760) || (y < 20) || vy <= 0) {
       diry*=-1;
       if (vy <= 0){
-        vy=9.81 * (millis()-time) * 10;
+        vy=9.81 * (millis()-time) / 1000;
       } else{
-        vy-=9.81 * (millis()-time) * 10;
+        vy-=9.81 * (millis()-time) / 500; // this simulates air resistance but its just lowers velocity whenever it bounces
       }
       x += vx * dirx;
       y += vy * diry;
       time = millis();
     } else if (diry == 1){
-      vy+=9.81 * (millis()-time) * 10;
+      vy+=9.81 * (millis()-time) / 1000;
       x += vx * dirx;
       y += vy * diry;
       time = millis();
     } else{
-      vy-=9.81 * (millis()-time) * 10;
+      vy-=9.81 * (millis()-time) / 1000;
       x += vx * dirx;
       y += vy * diry;
       time = millis();
@@ -227,7 +224,9 @@ void setup() {
     Rock r = new Rock(50+random(width-110), 50+random(height-110));
     thingsToDisplay.add(r);
   }
-
+  EarthBall e = new EarthBall(100,100);
+  thingsToDisplay.add(e);
+  thingsToMove.add(e);
   LivingRock m = new LivingRock(50+random(width-100), 50+random(height)-100);
   thingsToDisplay.add(m);
   thingsToMove.add(m);

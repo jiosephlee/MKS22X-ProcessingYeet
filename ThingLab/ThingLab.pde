@@ -31,7 +31,8 @@ class Rock extends Thing implements Displayable{
 
 
   void display() {
-    image(rock, x, y, 50, 50);
+    //image(rock, x, y, 50, 50);
+    ellipse(x, y, 50, 50);
   }
 
   boolean isTouching(Thing other) {
@@ -95,8 +96,27 @@ public class LivingRock extends Rock implements Moveable {
 }
 
 class Ball extends Thing implements Displayable, Moveable {
+  int velocity,dirx,diry;
+  float vx,vy;
+  
   Ball(float x, float y) {
     super(x, y);
+    velocity = (int)random(4) + 2;
+    vx = random(velocity-1)+1;
+    vy = velocity*velocity - (vx*vx);
+    if(random(1) < 0.5){
+      dirx = 1;
+    } else{
+      dirx = -1;
+    }
+    if(random(1) < 0.5){
+      diry = 1;
+    } else{
+      diry = -1;
+    }
+    System.out.println("vx :" + vx);
+    System.out.println("vy:" + vy);
+    System.out.println("dirx, diry" + dirx + "," + diry);
   }
 
   float r = random(255);
@@ -111,22 +131,18 @@ class Ball extends Thing implements Displayable, Moveable {
     ellipse(x, y, size, size);
   }
 
-
-
-  float a = random(-5, 5);
-  float b = random(-5, 5);
-  int direction=-1;
-
   void move() {
-    if ((x < 950) && (x > 10) && (y < 750) && (y > 40)) {
-      x += a*direction;
-      y += b*direction;
-    } else {
-      direction*=-1;
-      a = random(-5, 5);
-      b = random(-5, 5);
-      x += a*direction;
-      y += b*direction;
+    if((x > 970) || (x < 20)){
+      dirx*=-1;
+      x += vx * dirx;
+      y += vy * diry;
+    } else if ((y > 770) || (y < 30)) {
+      diry*=-1;
+      x += vx * dirx;
+      y += vy * diry;
+    } else{
+      x += vx * dirx;
+      y += vy * diry;
     }
   }
 }
@@ -204,7 +220,7 @@ void setup() {
     BBall b = new BBall(50+random(width-100), 50+random(height)-100);
     thingsToDisplay.add(b);
     thingsToMove.add(b);
-    Rock r = new Rock(50+random(width-100), 50+random(height)-100);
+    Rock r = new Rock(60+random(width-100), 60+random(height)-100);
     thingsToDisplay.add(r);
   }
 

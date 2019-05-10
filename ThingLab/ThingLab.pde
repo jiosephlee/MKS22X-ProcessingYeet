@@ -169,6 +169,9 @@ class EarthBall extends Ball implements Displayable, Moveable {
   int time;
   EarthBall(float x, float y) {
     super(x, y);
+    vy = 0;
+    vx = 1;
+    diry = 1;
     time = millis();
   }
   void display() {
@@ -180,22 +183,30 @@ class EarthBall extends Ball implements Displayable, Moveable {
   void move() {
     if((x > 970) || (x < 20)){
       dirx*=-1;
-    } else if ((y > 770) || (y < 30)) {
-      diry*=-1;
-    } else{
+      velocity+=9.81 * (millis()-time) * 10;
       x += vx * dirx;
       y += vy * diry;
-    }
-    
-    if (goingdown==true) {
-      x+=0.2*direction;
-      velocity+=9.81;
-      y += velocity;
-      time=millis();
-    } else {
-      time+=0.1;
-      x+=0.2*direction;
-      y = 750 - 1/2*9.81*time*time;
+      time = millis();
+    } else if ((y > 770) || (y < 30) || vy <= 0) {
+      diry*=-1;
+      if (vy <= 0){
+        vy=9.81 * (millis()-time) * 10;
+      } else{
+        vy-=9.81 * (millis()-time) * 10;
+      }
+      x += vx * dirx;
+      y += vy * diry;
+      time = millis();
+    } else if (diry == 1){
+      vy+=9.81 * (millis()-time) * 10;
+      x += vx * dirx;
+      y += vy * diry;
+      time = millis();
+    } else{
+      vy-=9.81 * (millis()-time) * 10;
+      x += vx * dirx;
+      y += vy * diry;
+      time = millis();
     }
   }
 }

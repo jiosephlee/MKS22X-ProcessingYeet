@@ -12,10 +12,12 @@ interface Collideable {
 
 class Thing implements Collideable {
   float x, y;
+  float size;
 
-  Thing(float x, float y) {
+  Thing(float x, float y, float s) {
     this.x = x;
     this.y = y;
+    size = s;
   }
   
   // if the distance between the two is smaller than half their sizes, they are overlapping
@@ -25,10 +27,11 @@ class Thing implements Collideable {
 }
 
 class Rock extends Thing implements Displayable{
-
+  float size;
   PImage rock;
   Rock(float x, float y) {
-    super(x, y);
+    super(x, y, 20);
+    size = 20;
     int n = (int)random(2);
     if (n==1) rock = loadImage("rock.png");
     else rock = loadImage("rock1.png");
@@ -109,7 +112,7 @@ class Ball extends Thing implements Displayable, Moveable {
   float vx,vy;
   
   Ball(float x, float y) {
-    super(x, y);
+    super(x, y, 20);
     velocity = (int)random(2) + 2;
     vx = random(velocity-1)+1;
     vy = velocity*velocity - (vx*vx);
@@ -220,18 +223,21 @@ class EarthBall extends Ball implements Displayable, Moveable {
 
 ArrayList<Displayable> thingsToDisplay;
 ArrayList<Moveable> thingsToMove;
+ArrayList<Collideable> ListOfCollideables;
 
 void setup() {
   size(1000, 800);
 
   thingsToDisplay = new ArrayList<Displayable>();
   thingsToMove = new ArrayList<Moveable>();
+  ListOfCollideables = new ArrayList<Collideable>();
   for (int i = 0; i < 10; i++) {
     BBall b = new BBall(50+random(width-110), 50+random(height-110));
     thingsToDisplay.add(b);
     thingsToMove.add(b);
     Rock r = new Rock(50+random(width-110), 50+random(height-110));
     thingsToDisplay.add(r);
+    ListOfCollideables.add(r);
   }
   EarthBall e = new EarthBall(100,100);
   thingsToDisplay.add(e);
@@ -239,6 +245,7 @@ void setup() {
   LivingRock m = new LivingRock(50+random(width-100), 50+random(height)-100);
   thingsToDisplay.add(m);
   thingsToMove.add(m);
+  ListOfCollideables.add(m);
 }
 
 void draw() {

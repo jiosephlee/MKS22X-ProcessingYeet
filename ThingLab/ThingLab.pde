@@ -21,8 +21,8 @@ class Thing implements Collideable {
   }
   
   boolean isTouching(Thing other) {
-    if (other.x <= (this.x + 25) && other.x >= (this.x - 25) 
-      && other.y <= (this.y + 25) && other.y >= (this.y - 25)) {
+    if (other.x <= (this.x + 50) && other.x >= (this.x - 50) 
+      && other.y <= (this.y + 50) && other.y >= (this.y - 50)) {
       return true;
     }
     return false;
@@ -185,7 +185,7 @@ class BBall extends Ball implements Displayable, Moveable {
   void display() {
     if (collide) {
       fill(255,0,0);
-      ellipse(x,y,50,50);
+      ellipse(x+20,y+20,50,50);
     } else {
       image(google, x,y,50,50);
     }

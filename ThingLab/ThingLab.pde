@@ -43,8 +43,8 @@ class Rock extends Thing implements Displayable{
 
 
   void display() {
-    image(rock, x, y, 50, 50);
-   // ellipse(x, y, 50, 50);
+   // image(rock, x, y, 50, 50);
+    ellipse(x, y, 50, 50);
   }
 
   boolean isTouching(Thing other) {

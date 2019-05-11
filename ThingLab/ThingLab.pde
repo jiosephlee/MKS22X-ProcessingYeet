@@ -43,8 +43,8 @@ class Rock extends Thing implements Displayable{
 
 
   void display() {
-    //image(rock, x, y, 50, 50);
-    ellipse(x, y, 50, 50);
+    image(rock, x, y, 50, 50);
+   // ellipse(x, y, 50, 50);
   }
 
   boolean isTouching(Thing other) {
@@ -157,6 +157,8 @@ class Ball extends Thing implements Displayable, Moveable {
     for (Collideable c : ListOfCollideables) {
       if (c.isTouching(this)) {
         // do something
+       // fill(255,0,0);
+        //ellipse(c.x, c.y, size, size);
       }
     }
   }

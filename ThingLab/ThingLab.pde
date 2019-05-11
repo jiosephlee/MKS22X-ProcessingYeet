@@ -6,12 +6,21 @@ interface Moveable {
   void move();
 }
 
-class Thing {
+interface Collideable {
+  boolean isTouching(Thing other);
+}
+
+class Thing implements Collideable {
   float x, y;
 
   Thing(float x, float y) {
     this.x = x;
     this.y = y;
+  }
+  
+  // if the distance between the two is smaller than half their sizes, they are overlapping
+  boolean isTouching(Thing other) {
+    return dist(this.x, this.y, other.x, other.y) <= (this.size + other.size) / 2;
   }
 }
 

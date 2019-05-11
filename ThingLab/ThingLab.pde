@@ -26,10 +26,10 @@ class Thing implements Collideable {
       return true;
     }
     return false;
-  }
+  } 
   // if the distance between the two is smaller than half their sizes, they are overlapping
- // boolean isTouching(Thing other) {
-   // return dist(this.x, this.y, other.x, other.y) <= (this.size + other.size) / 2;
+  //boolean isTouching(Thing other) {
+    //return dist(this.x, this.y, other.x, other.y) <= (this.size + other.size) / 2;
   //}
 }
 
@@ -166,9 +166,6 @@ class Ball extends Thing implements Displayable, Moveable {
     for (Collideable c : ListOfCollideables) {
       if (c.isTouching(this)) {
         this.collide = true;
-        // do something
-       // fill(255,0,0);
-        //ellipse(c.x, c.y, size, size);
       }
     }
   }
@@ -185,7 +182,7 @@ class BBall extends Ball implements Displayable, Moveable {
   void display() {
     if (collide) {
       fill(255,0,0);
-      ellipse(x+20,y+20,50,50);
+      ellipse(x+25,y+25,50,50);
     } else {
       image(google, x,y,50,50);
     }
@@ -246,6 +243,11 @@ class EarthBall extends Ball implements Displayable, Moveable {
       x += vx * dirx;
       y += vy * diry;
       time = millis();
+    }
+    for (Collideable c : ListOfCollideables) {
+      if (c.isTouching(this)) {
+        this.collide = true;
+      }
     }
   }
 }

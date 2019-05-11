@@ -20,10 +20,17 @@ class Thing implements Collideable {
     size = s;
   }
   
-  // if the distance between the two is smaller than half their sizes, they are overlapping
   boolean isTouching(Thing other) {
-    return dist(this.x, this.y, other.x, other.y) <= (this.size + other.size) / 2;
+    if (other.x <= (this.x + 25) && other.x >= (this.x - 25) 
+      && other.y <= (this.y + 25) && other.y >= (this.y - 25)) {
+      return true;
+    }
+    return false;
   }
+  // if the distance between the two is smaller than half their sizes, they are overlapping
+ // boolean isTouching(Thing other) {
+   // return dist(this.x, this.y, other.x, other.y) <= (this.size + other.size) / 2;
+  //}
 }
 
 class Rock extends Thing implements Displayable{
@@ -44,16 +51,17 @@ class Rock extends Thing implements Displayable{
 
   void display() {
    // image(rock, x, y, 50, 50);
+    fill(0);
     ellipse(x, y, 50, 50);
   }
 
-  boolean isTouching(Thing other) {
-    if (other.x <= (this.x + 25) && other.x >= (this.x - 25) 
-      && other.y <= (this.y + 25) && other.y >= (this.y - 25)) {
-      return true;
-    }
-    return false;
-  }
+ // boolean isTouching(Thing other) {
+   // if (other.x <= (this.x + 25) && other.x >= (this.x - 25) 
+     // && other.y <= (this.y + 25) && other.y >= (this.y - 25)) {
+      //return true;
+    //}
+   // return false;
+ // }
 }
 
 public class LivingRock extends Rock implements Moveable {
@@ -110,6 +118,7 @@ public class LivingRock extends Rock implements Moveable {
 class Ball extends Thing implements Displayable, Moveable {
   int velocity,dirx,diry;
   float vx,vy;
+  boolean collide = false;
   
   Ball(float x, float y) {
     super(x, y, 20);
@@ -156,6 +165,7 @@ class Ball extends Thing implements Displayable, Moveable {
     
     for (Collideable c : ListOfCollideables) {
       if (c.isTouching(this)) {
+        this.collide = true;
         // do something
        // fill(255,0,0);
         //ellipse(c.x, c.y, size, size);
@@ -173,7 +183,13 @@ class BBall extends Ball implements Displayable, Moveable {
   PImage google = loadImage("ball.png");
   
   void display() {
-    image(google, x,y,50,50);
+    if (collide) {
+      fill(255,0,0);
+      ellipse(x,y,50,50);
+    } else {
+      image(google, x,y,50,50);
+    }
+    collide = false;
   }
 
   void move() {
@@ -192,9 +208,15 @@ class EarthBall extends Ball implements Displayable, Moveable {
     time = millis();
   }
   void display() {
-    noStroke();
-    fill(142, 100, 64);
-    ellipse(x, y, 50, 50);
+    if (collide) {
+      fill(255,0,0);
+      ellipse(x,y, 50,50);
+    } else {
+      noStroke();
+      fill(142, 100, 64);
+      ellipse(x, y, 50, 50);
+    }
+    collide = false;
   }
 
   void move() {

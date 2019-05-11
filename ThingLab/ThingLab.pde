@@ -153,6 +153,12 @@ class Ball extends Thing implements Displayable, Moveable {
       x += vx * dirx;
       y += vy * diry;
     }
+    
+    for (Collideable c : ListOfCollideables) {
+      if (c.isTouching(this)) {
+        // do something
+      }
+    }
   }
 }
 

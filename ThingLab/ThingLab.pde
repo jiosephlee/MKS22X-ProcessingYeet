@@ -76,15 +76,16 @@ public class LivingRock extends Rock implements Moveable {
   void display() {
     super.display();
     fill(255);
-    ellipse(x+10, y+20, 20, 20);
-    ellipse(x+35, y+20, 15, 15);
+    ellipse(x-15, y, 20, 20);
+    ellipse(x+15, y, 15, 15);
     fill(eyeColors[0], eyeColors[1], eyeColors[2]);
-    ellipse(x+5, y+20, 10, 10);
-    ellipse(x+30, y+20, 10, 10);
+    ellipse(x-15, y, 10, 10);
+    ellipse(x+15, y, 10, 10);
     fill(0);
-    ellipse(x+7, y+20, 7, 7);
-    ellipse(x+26, y+20, 7, 7);
+    ellipse(x-13, y, 7, 7);
+    ellipse(x+13, y, 7, 7);
   }
+
 
 
   float z= random(0, 10);
@@ -222,6 +223,10 @@ class EarthBall extends Ball implements Displayable, Moveable {
   }
 
   void move() {
+    if (vy < 0.1 && y > 740){
+      vy = 0;
+      y = 760;
+    }
     if((x > 960) || (x < 20)){
       dirx*=-1;
       velocity+=9.81 * (millis()-time) / 1000;

@@ -79,12 +79,13 @@ public class LivingRock extends Rock implements Moveable {
     ellipse(x+10, y+20, 20, 20);
     ellipse(x+35, y+20, 15, 15);
     fill(eyeColors[0], eyeColors[1], eyeColors[2]);
-    ellipse(x+10, y+20, 10, 10);
-    ellipse(x+35, y+20, 10, 10);
+    ellipse(x+5, y+20, 10, 10);
+    ellipse(x+30, y+20, 10, 10);
     fill(0);
-    ellipse(x+12, y+20, 7, 7);
-    ellipse(x+33, y+20, 7, 7);
+    ellipse(x+7, y+20, 7, 7);
+    ellipse(x+26, y+20, 7, 7);
   }
+
 
   float z= random(0, 10);
   float g = random(0, 10);

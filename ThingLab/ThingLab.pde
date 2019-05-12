@@ -99,15 +99,15 @@ public class LivingRock extends Rock implements Moveable {
      
      y += g;
      }*/
-    if (mouseX != mouseXP || mouseY != mouseYP && x != mouseX || y != mouseY){
-      if ((x < 950) && (x > 10)) {
+    if (mouseX != mouseXP || mouseY != mouseYP && x != mouseX && y != mouseY){
+      if ((mouseX < 950) && (mouseY > 10)) {
         if (mouseX > x) {
           x += z;
         } else {
           x -= z;
         }
       }
-      if ((y < 740) && (y > 10)) {
+      if ((mouseY < 740) && (mouseY > 10)) {
         if (mouseY > y) {
           y += z;
         } else {

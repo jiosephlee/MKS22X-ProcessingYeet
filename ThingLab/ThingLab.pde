@@ -98,23 +98,21 @@ public class LivingRock extends Rock implements Moveable {
      if ((y < 740) && (y > 10)){
      
      y += g;
-     }*/
-    if (mouseX != mouseXP || mouseY != mouseYP && x != mouseX && y != mouseY){
-      if ((mouseX < 950) && (mouseY > 10)) {
-        if (mouseX > x) {
-          x += z;
-        } else {
-          x -= z;
-        }
-      }
-      if ((mouseY < 740) && (mouseY > 10)) {
-        if (mouseY > y) {
-          y += z;
-        } else {
-          y -= z;
-        }
-      }
-    }
+     }*/  
+     if ((mouseX < 950) && (mouseY > 10) && (mouseX != mouseXP || x > mouseX + 10 || x < mouseX - 10)){
+       if (mouseX > x) {
+         x += z;
+       } else {
+         x -= z;
+       }
+     }
+     if ((mouseY < 740) && (mouseY > 10) && (mouseY != mouseYP || y > mouseY + 10 || y < mouseY - 10)) {
+       if (mouseY > y) {
+         y += z;
+       } else {
+         y -= z;
+       }
+     }
     mouseXP = mouseX;
     mouseYP = mouseY;
     //if touching thing should go here for collisions but I don't know which other thing to use?

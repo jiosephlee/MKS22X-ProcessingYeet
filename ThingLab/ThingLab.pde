@@ -205,6 +205,7 @@ class BBall extends Ball implements Displayable, Moveable {
 class EarthBall extends Ball implements Displayable, Moveable {
   int time;
   float friction;
+  boolean wasPressed;
   EarthBall(float x, float y, float friction) {
     super(x, y);
     vy = 0;
@@ -264,6 +265,19 @@ class EarthBall extends Ball implements Displayable, Moveable {
         this.collide = true;
       }
     }
+   /* boolean rockTouch = false;
+    for (EarthBall e : earthBalls) {
+      if (abs(e.x-mouseX) <= 25 && abs(e.y-mouseY) <= 25) {
+        rockTouch = true;
+      }
+    }
+    if (wasPressed) {
+      y -= 50;
+      wasPressed = false;
+    }
+    if (mousePressed && rockTouch) {
+      wasPressed = true;
+    } */
   }
 }
 
@@ -314,6 +328,8 @@ void setup() {
 }
 
 boolean wasMousePressed = false;
+//boolean movedBall = false;
+EarthBall pressed = null;
 void createRocks(){
   
   if (mousePressed && !wasMousePressed){
@@ -321,21 +337,32 @@ void createRocks(){
     for (EarthBall e : earthBalls) {
       if (abs(e.x-mouseX) <= 25 && abs(e.y-mouseY) <= 25) {
         onRock = true;
+        pressed = e;
       }
     }
     if (!onRock) {
       EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
+      earthBalls.add(e);
       thingsToDisplay.add(e);
       thingsToMove.add(e);
       wasMousePressed = true;
     }
+   // if (onRock) {
+     // pressed.y -= 100;
+    //}
   }
-    else if (mousePressed){
-       wasMousePressed = true;
+  else if (mousePressed){
+     wasMousePressed = true;
+     //movedBall = false;
+  }
+  else{
+    if (pressed != null) {
+      pressed.y -= 500;
+      pressed = null;
+      movedBall = true;
     }
-    else{
-      wasMousePressed = false;
-    }
+    wasMousePressed = false;
+  }
 }
 
 void draw() {

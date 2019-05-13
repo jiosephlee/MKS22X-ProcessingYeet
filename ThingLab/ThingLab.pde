@@ -74,7 +74,7 @@ public class LivingRock extends Rock implements Moveable {
 
 
 
-  float z= 1;
+  float z= 0.93;
   float mouseXP = -1;
   float mouseYP = -1;
 
@@ -193,6 +193,13 @@ class BBall extends Ball implements Displayable, Moveable {
         count++;
       }
     }
+    for (BBall v : beachBalls) {
+      if (v != this && v.isTouching(this)) {
+        x = (50+random(height-110));
+        y = (50+random(width-110));
+        count++;
+      }
+    }
     if (count !=0) {
       fixcoordinates(b);
     } else {
@@ -211,6 +218,12 @@ class BBall extends Ball implements Displayable, Moveable {
 
   void move() {
     super.move();
+    for (BBall b : beachBalls) {
+      if (b != this && b.isTouching(this)) {
+        dirx*=-1;
+        diry*=-1;
+      }
+    }
   }
 }
 

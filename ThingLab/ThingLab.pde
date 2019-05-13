@@ -210,7 +210,7 @@ class EarthBall extends Ball implements Displayable, Moveable {
   }
   void display() {
     if (collide) {
-      fill(255,0,0);
+      fill(0,0,255);
       ellipse(x,y, 50,50);
     } else {
       noStroke();
@@ -280,6 +280,9 @@ void setup() {
     BBall b = new BBall(50+random(width-110), 50+random(height-110), google);
     thingsToDisplay.add(b);
     thingsToMove.add(b);
+    EarthBall e = new EarthBall(50+random(width-110),50+random(height-110));
+    thingsToDisplay.add(e);
+    thingsToMove.add(e);
     PImage rockimage;
     int n = (int)random(2);
     if (n == 1) rockimage = rock;
@@ -289,9 +292,7 @@ void setup() {
     thingsToDisplay.add(r);
     ListOfCollideables.add(r);
   }
-  EarthBall e = new EarthBall(100,100);
-  thingsToDisplay.add(e);
-  thingsToMove.add(e);
+  
   LivingRock m = new LivingRock(50+random(width-100), 50+random(height)-100, rock);
   thingsToDisplay.add(m);
   thingsToMove.add(m);

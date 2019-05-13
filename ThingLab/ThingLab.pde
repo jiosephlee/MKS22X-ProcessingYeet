@@ -172,6 +172,13 @@ class Ball extends Thing implements Displayable, Moveable {
         this.collide = true;
       }
     }
+    
+    if (this.collide == true) {
+      dirx*=-1;
+      diry*=-1;
+      x += vx * dirx;
+      y += vy * diry;
+    }
   }
 }
 
@@ -277,20 +284,21 @@ void setup() {
   thingsToMove = new ArrayList<Moveable>();
   ListOfCollideables = new ArrayList<Collideable>();
   for (int i = 0; i < 10; i++) {
+    PImage rockimage;
+    int n = (int)random(2);
+    if (n == 1) rockimage = rock;
+    else rockimage = rock1;
+    Rock r = new Rock(50+random(width-110), 50+random(height-110), rockimage);
+    thingsToDisplay.add(r);
+    ListOfCollideables.add(r);
+  }
+  for (int i = 0; i < 5; i++){
     BBall b = new BBall(50+random(width-110), 50+random(height-110), google);
     thingsToDisplay.add(b);
     thingsToMove.add(b);
     EarthBall e = new EarthBall(50+random(width-110),50+random(height-110));
     thingsToDisplay.add(e);
     thingsToMove.add(e);
-    PImage rockimage;
-    int n = (int)random(2);
-    if (n == 1) rockimage = rock;
-    else rockimage = rock1;
-    Rock r = new Rock(50+random(width-110), 50+random(height-110), rockimage);
-
-    thingsToDisplay.add(r);
-    ListOfCollideables.add(r);
   }
   
   LivingRock m = new LivingRock(50+random(width-100), 50+random(height)-100, rock);

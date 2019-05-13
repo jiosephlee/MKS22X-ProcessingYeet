@@ -49,9 +49,9 @@ class Rock extends Thing implements Displayable{
 
 
   void display() {
-   // image(rock, x, y, 50, 50);
-    fill(0);
-    ellipse(x, y, 50, 50);
+    image(rock, x, y, 50, 50);
+    //fill(0);
+    //ellipse(x, y, 50, 50);
   }
 
  // boolean isTouching(Thing other) {
@@ -75,14 +75,15 @@ public class LivingRock extends Rock implements Moveable {
   void display() {
     super.display();
     fill(255);
-    ellipse(x-15, y, 20, 20);
-    ellipse(x+15, y, 15, 15);
+    ellipse(x+15, y +15, 20, 20);
+    ellipse(x+35, y +15, 15, 15);
+    
     fill(eyeColors[0], eyeColors[1], eyeColors[2]);
-    ellipse(x-15, y, 10, 10);
-    ellipse(x+15, y, 10, 10);
+    ellipse(x+15, y +18, 10, 10);
+    ellipse(x+35, y+ 15, 10, 10);
     fill(0);
-    ellipse(x-13, y, 7, 7);
-    ellipse(x+13, y, 7, 7);
+    ellipse(x+15, y+18, 7, 7);
+    ellipse(x+35, y+15, 7, 7);
   }
 
 
@@ -301,7 +302,7 @@ void setup() {
 }
 
 void draw() {
-  background(255);
+  background(40,40,40);
 
   for (Displayable thing : thingsToDisplay) {
     thing.display();

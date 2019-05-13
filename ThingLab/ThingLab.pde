@@ -300,7 +300,7 @@ void setup() {
     BBall b = new BBall(50+random(width-110), 50+random(height-110), google);
     thingsToDisplay.add(b);
     thingsToMove.add(b);
-    EarthBall e = new EarthBall(50+random(width-110),50+random(height-110));
+    EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
     thingsToDisplay.add(e);
     thingsToMove.add(e);
   }

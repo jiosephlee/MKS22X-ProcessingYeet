@@ -310,6 +310,22 @@ void setup() {
   ListOfCollideables.add(m);
 }
 
+boolean wasMousePressed = false;
+void createRocks(){
+  if (mousePressed && !wasMousePressed){
+      EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
+      thingsToDisplay.add(e);
+      thingsToMove.add(e);
+      wasMousePressed = true;
+    }
+    else if (mousePressed){
+       wasMousePressed = true;
+    }
+    else{
+      wasMousePressed = false;
+    }
+}
+
 void draw() {
   background(255);
 
@@ -319,4 +335,5 @@ void draw() {
   for (Moveable thing : thingsToMove) {
     thing.move();
   }
+  createRocks();
 }

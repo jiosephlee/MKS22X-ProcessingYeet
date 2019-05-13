@@ -39,11 +39,6 @@ class Rock extends Thing implements Displayable{
   Rock(float x, float y, PImage r) {
     super(x, y, 20);
     size = 20;
-<<<<<<< HEAD
-    int n = (int)random(2);
-=======
-
->>>>>>> e56061d1f371860d4d10f4d441e99f9f3b9b7ab9
     rock = r;
   }
 
@@ -54,13 +49,6 @@ class Rock extends Thing implements Displayable{
 
   void display() {
     image(rock, x, y, 50, 50);
-<<<<<<< HEAD
-    //fill(0);
-    //ellipse(x, y, 50, 50);
-=======
-   // fill(0);
-   // ellipse(x, y, 50, 50);
->>>>>>> e56061d1f371860d4d10f4d441e99f9f3b9b7ab9
   }
 
  // boolean isTouching(Thing other) {
@@ -84,7 +72,7 @@ public class LivingRock extends Rock implements Moveable {
   void display() {
     super.display();
     fill(255);
-<<<<<<< HEAD
+
     ellipse(x+15, y +15, 20, 20);
     ellipse(x+35, y +15, 15, 15);
     
@@ -94,16 +82,6 @@ public class LivingRock extends Rock implements Moveable {
     fill(0);
     ellipse(x+15, y+18, 7, 7);
     ellipse(x+35, y+15, 7, 7);
-=======
-    ellipse(x+5, y+20, 20, 20);
-    ellipse(x+30, y+20, 15, 15);
-    fill(eyeColors[0], eyeColors[1], eyeColors[2]);
-    ellipse(x+5, y+20, 10, 10);
-    ellipse(x+30, y+20, 10, 10);
-    fill(0);
-    ellipse(x+7, y+20, 7, 7);
-    ellipse(x+30, y+20, 7, 7);
->>>>>>> e56061d1f371860d4d10f4d441e99f9f3b9b7ab9
   }
 
 
@@ -204,15 +182,7 @@ class BBall extends Ball implements Displayable, Moveable {
     super(x, y);
     google = g;
   }
-<<<<<<< HEAD
-  
-  //PImage google = loadImage("ball.png");
-  
-=======
 
-  //PImage google = loadImage("ball.png");
-
->>>>>>> e56061d1f371860d4d10f4d441e99f9f3b9b7ab9
   void display() {
     if (collide) {
       fill(255,0,0);
@@ -298,18 +268,11 @@ ArrayList<Collideable> ListOfCollideables;
 void setup() {
   size(1000, 800);
   PImage rock;
-<<<<<<< HEAD
   PImage rock1;
   PImage google = loadImage("ball.png");
   
   rock = loadImage("rock.png");
   rock1 = loadImage("rock1.png");
-=======
-  PImage google = loadImage("ball.png");
-  int n = (int)random(2);
-  if (n==1) rock = loadImage("rock.png");
-  else rock = loadImage("rock1.png");
->>>>>>> e56061d1f371860d4d10f4d441e99f9f3b9b7ab9
   thingsToDisplay = new ArrayList<Displayable>();
   thingsToMove = new ArrayList<Moveable>();
   ListOfCollideables = new ArrayList<Collideable>();
@@ -317,15 +280,12 @@ void setup() {
     BBall b = new BBall(50+random(width-110), 50+random(height-110), google);
     thingsToDisplay.add(b);
     thingsToMove.add(b);
-<<<<<<< HEAD
     PImage rockimage;
     int n = (int)random(2);
     if (n == 1) rockimage = rock;
     else rockimage = rock1;
     Rock r = new Rock(50+random(width-110), 50+random(height-110), rockimage);
-=======
-    Rock r = new Rock(50+random(width-110), 50+random(height-110), rock);
->>>>>>> e56061d1f371860d4d10f4d441e99f9f3b9b7ab9
+
     thingsToDisplay.add(r);
     ListOfCollideables.add(r);
   }
@@ -339,7 +299,7 @@ void setup() {
 }
 
 void draw() {
-  background(40,40,40);
+  background(255);
 
   for (Displayable thing : thingsToDisplay) {
     thing.display();

@@ -1,5 +1,14 @@
 # MKS22X-ProcessingYeet
 Pairs: Joseph and Angel, Grace and Sophie
+Features:
+
+- BeachBalls bounce off the wall by the law of incidence
+- BeachBalls bounce off of rocks and off of other BeachBalls
+- EarthBalls move by the force of gravity with a user-controllable parameter of air-resistance
+- Click an empty space to create an EarthBall
+- Click an EarthBall to make it jump (recommend clicking on the EarthBalls that has stopped bouncing. If you try to click on a fast moving   Earthball, you'll probably miss, creating an EarthBall and it'll get messy if you keep on doing that)
+- The LivingRock follows wherever your mouse is
+
 General:
 - Joseph made the ball movements for both BBall and Earth Ball, and fixed several major bugs such as balls getting stuck in many different   places and overlapping ball co-ordinates in the setup
 - Angel worked on both displays(), helped integrate code and fix little things heavily in the beginning when grace and sophie were out for   AP stuff, and created the bounce-when-collide-on-rock feature for Bball

@@ -359,7 +359,7 @@ void createRocks(){
     if (pressed != null) {
       pressed.y -= 500;
       pressed = null;
-      movedBall = true;
+    //  movedBall = true;
     }
     wasMousePressed = false;
   }

@@ -15,7 +15,7 @@ May 8:
 - Joseph: started more complicated ball moves()
 
 May 10:
-- Joseph: Finisehed BBall and Earthball moves()
+- Joseph: Finished BBall and Earthball moves()
 May 12:
-- Sophie: fixed problem with living rock shaking and getting stuck on sides of screen, fixed problem with earth ball going off screen
+- Sophie: fixed problem with living rock shaking and getting stuck on sides of screen, fixed problem with earth ball going off screen, made more earthBalls appear when you click
 - Joseph: tweaked Earthball for more user-control and aesthetics

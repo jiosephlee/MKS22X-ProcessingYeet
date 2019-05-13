@@ -272,6 +272,7 @@ ArrayList<Displayable> thingsToDisplay;
 ArrayList<Moveable> thingsToMove;
 ArrayList<Collideable> ListOfCollideables;
 ArrayList<BBall> beachBalls;
+ArrayList<EarthBall> earthBalls;
 
 void setup() {
   size(1000, 800);
@@ -285,6 +286,7 @@ void setup() {
   thingsToMove = new ArrayList<Moveable>();
   ListOfCollideables = new ArrayList<Collideable>();
   beachBalls = new ArrayList<BBall>();
+  earthBalls = new ArrayList<EarthBall>();
   for (int i = 0; i < 10; i++) {
     PImage rockimage;
     int n = (int)random(2);
@@ -300,6 +302,7 @@ void setup() {
     thingsToMove.add(b);
     beachBalls.add(b);
     EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
+    earthBalls.add(e);
     thingsToDisplay.add(e);
     thingsToMove.add(e);
   }
@@ -312,12 +315,21 @@ void setup() {
 
 boolean wasMousePressed = false;
 void createRocks(){
+  
   if (mousePressed && !wasMousePressed){
+    boolean onRock = false;
+    for (EarthBall e : earthBalls) {
+      if (abs(e.x-mouseX) <= 25 && abs(e.y-mouseY) <= 25) {
+        onRock = true;
+      }
+    }
+    if (!onRock) {
       EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
       thingsToDisplay.add(e);
       thingsToMove.add(e);
       wasMousePressed = true;
     }
+  }
     else if (mousePressed){
        wasMousePressed = true;
     }

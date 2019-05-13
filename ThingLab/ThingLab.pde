@@ -320,7 +320,10 @@ void createRocks(){
       wasMousePressed = true;
     }
     else if (mousePressed){
-       wasMousePressed = false;
+       wasMousePressed = true;
+    }
+    else{
+      wasMousePressed = false;
     }
 }
 

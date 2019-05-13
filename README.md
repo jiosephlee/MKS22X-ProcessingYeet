@@ -8,21 +8,27 @@ General:
 
 May 6:
 - the work was split to 4 people (because of APs and such, we later deviated from initial plans)
+
 May 7:
 - Today, as sophie and grace are out from APs 
 - Angel: ball move and merge conflicts
 - Joseph: helped make ball move within boundaries
+
 May 8:
 - Sophie: made living rock follow the mouse and tried to start collideable interface
 - Joseph: started more complicated ball moves()
 - Angel : changed ball and earthball display and modified some movement method things
+
 May 9:
 - Angel: worked on living rock movement and made the rock display random
 - Joseph: worked on gravity ball
+
 May 10:
 - Joseph: Finished BBall and Earthball moves()
+
 May 11:
 - Grace: completed collideable interface, made balls turn red when they collide with rocks
+
 May 12:
 - Sophie: fixed problem with living rock shaking and getting stuck on sides of screen, fixed problem with earth ball going off screen, made more earthBalls appear when you click
 - Joseph: tweaked Earthball for more user-control and aesthetics, fixed several major bugs

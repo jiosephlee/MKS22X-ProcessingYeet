@@ -27,10 +27,6 @@ class Thing implements Collideable {
     }
     return false;
   }
-  // if the distance between the two is smaller than half their sizes, they are overlapping
-  //boolean isTouching(Thing other) {
-    //return dist(this.x, this.y, other.x, other.y) <= (this.size + other.size) / 2;
-  //}
 }
 
 class Rock extends Thing implements Displayable{
@@ -50,14 +46,6 @@ class Rock extends Thing implements Displayable{
   void display() {
     image(rock, x, y, 50, 50);
   }
-
- // boolean isTouching(Thing other) {
-   // if (other.x <= (this.x + 25) && other.x >= (this.x - 25)
-     // && other.y <= (this.y + 25) && other.y >= (this.y - 25)) {
-      //return true;
-    //}
-   // return false;
- // }
 }
 
 public class LivingRock extends Rock implements Moveable {
@@ -202,6 +190,14 @@ class BBall extends Ball implements Displayable, Moveable {
 
   void move() {
     super.move();
+    for (BBall b : beachBalls) {
+      if (b != this && b.isTouching(this)) {
+        dirx*=-1;
+        diry*=-1;
+        x += vx * dirx;
+        y += vy * diry;
+      }
+    }
   }
 
 }
@@ -275,6 +271,7 @@ class EarthBall extends Ball implements Displayable, Moveable {
 ArrayList<Displayable> thingsToDisplay;
 ArrayList<Moveable> thingsToMove;
 ArrayList<Collideable> ListOfCollideables;
+ArrayList<BBall> beachBalls;
 
 void setup() {
   size(1000, 800);
@@ -287,6 +284,7 @@ void setup() {
   thingsToDisplay = new ArrayList<Displayable>();
   thingsToMove = new ArrayList<Moveable>();
   ListOfCollideables = new ArrayList<Collideable>();
+  beachBalls = new ArrayList<BBall>();
   for (int i = 0; i < 10; i++) {
     PImage rockimage;
     int n = (int)random(2);
@@ -300,6 +298,7 @@ void setup() {
     BBall b = new BBall(50+random(width-110), 50+random(height-110), google);
     thingsToDisplay.add(b);
     thingsToMove.add(b);
+    beachBalls.add(b);
     EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
     thingsToDisplay.add(e);
     thingsToMove.add(e);

@@ -204,12 +204,14 @@ class BBall extends Ball implements Displayable, Moveable {
 
 class EarthBall extends Ball implements Displayable, Moveable {
   int time;
-  EarthBall(float x, float y) {
+  float friction;
+  EarthBall(float x, float y, float friction) {
     super(x, y);
     vy = 0;
     vx = 1;
     diry = -1;
     time = millis();
+    this.friction = friction;
   }
   void display() {
     if (collide) {
@@ -224,33 +226,35 @@ class EarthBall extends Ball implements Displayable, Moveable {
   }
 
   void move() {
-    if (vy < 0.1 && y > 740){
+    if (vy < 0.005 && y > 759){
       vy = 0;
       y = 760;
     }
     if((x > 960) || (x < 20)){
       dirx*=-1;
-      velocity+=9.81 * (millis()-time) / 1000;
+      velocity+=9.91 * (millis()-time) / 1000;
       x += vx * dirx;
       y += vy * diry;
       time = millis();
     } else if ((y > 760) || (y < 20) || vy <= 0) {
       diry*=-1;
       if (vy <= 0){
-        vy=9.81 * (millis()-time) / 1000;
+        vy=9.91 * (millis()-time) / 1000;
+        x += vx * dirx;
+        y += vy * diry;
       } else{
-        vy-=9.81 * (millis()-time) / 500; // this simulates air resistance but its just lowers velocity whenever it bounces
+        x += vx * dirx;
+        y += vy * diry;
+        vy-=((9.81 + friction) * (millis()-time) / 1000) * (10/vy); // simulates air resistance but also creates the fast bouncing effect we see in earth
       }
-      x += vx * dirx;
-      y += vy * diry;
       time = millis();
     } else if (diry == 1){
-      vy+=9.81 * (millis()-time) / 1000;
+      vy+=9.81 * (millis()-time) / 1000; 
       x += vx * dirx;
       y += vy * diry;
       time = millis();
     } else{
-      vy-=9.81 * (millis()-time) / 1000;
+      vy-=(9.81 + friction )* (millis()-time) / 1000; // stimulates air resistance
       x += vx * dirx;
       y += vy * diry;
       time = millis();
@@ -286,7 +290,7 @@ void setup() {
     thingsToDisplay.add(r);
     ListOfCollideables.add(r);
   }
-  EarthBall e = new EarthBall(100,100);
+  EarthBall e = new EarthBall(100,100,0.3);
   thingsToDisplay.add(e);
   thingsToMove.add(e);
   LivingRock m = new LivingRock(50+random(width-100), 50+random(height)-100, rock);

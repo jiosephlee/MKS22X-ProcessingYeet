@@ -1,7 +1,7 @@
 # MKS22X-ProcessingYeet
 Pairs: Joseph and Angel, Grace and Sophie
 General:
-- Joseph made the ball movements for both BBall and Earth Ball, and fixed several major bugs
+- Joseph made the ball movements for both BBall and Earth Ball, and fixed several major bugs such as balls getting stuck in many different   places and overlapping ball co-ordinates in the setup
 - Angel worked on both displays(), helped integrate code and fix little things heavily in the beginning when grace and sophie were out for   AP stuff, and created the bounce-when-collide-on-rock feature for Bball
 - Sophie helped work on livingrock move(), helped in Collideable, fixed a bug in Earthball movement, and created the create-more-Earthballs     when-mouse-pressed feature
 - Grace worked on Collideable, made the EarthBalls-jump-when-clicked feature, and made the BBalls-bounce-off-of-other-BBalls feature

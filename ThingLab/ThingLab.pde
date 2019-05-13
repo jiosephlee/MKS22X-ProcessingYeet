@@ -83,7 +83,7 @@ public class LivingRock extends Rock implements Moveable {
      x += z;
      }
      if ((y < 740) && (y > 10)){
-
+     
      y += g;
      }*/
     if ((mouseX < 950) && (mouseY > 10) && (mouseX != mouseXP || x > mouseX + 7 || x < mouseX - 7)) {
@@ -282,6 +282,8 @@ class EarthBall extends Ball implements Displayable, Moveable {
   void addVerticalV() {
     vy = 15;
     diry = -1;
+    x += vx * dirx;
+    y += vy * diry;
   }
 }
 
@@ -320,11 +322,11 @@ void setup() {
     thingsToDisplay.add(b);
     thingsToMove.add(b);
     beachBalls.add(b);
-    EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
-    earthBalls.add(e);
-    thingsToDisplay.add(e);
-    thingsToMove.add(e);
   }
+  EarthBall e = new EarthBall(50+random(width-110), 50+random(height-110), 0.3);//0.3 is the recommended co-effictient for aesthetics
+  earthBalls.add(e);
+  thingsToDisplay.add(e);
+  thingsToMove.add(e);
 
   LivingRock m = new LivingRock(50+random(width-100), 50+random(height)-100, rock);
   thingsToDisplay.add(m);
@@ -335,9 +337,9 @@ void setup() {
 boolean wasMousePressed = false;
 //boolean movedBall = false;
 EarthBall pressed = null;
-void createRocks(){
+void createRocks() {
 
-  if (mousePressed && !wasMousePressed){
+  if (mousePressed && !wasMousePressed) {
     boolean onRock = false;
     for (EarthBall e : earthBalls) {
       if (abs(e.x-mouseX) <= 25 && abs(e.y-mouseY) <= 25) {
@@ -346,26 +348,24 @@ void createRocks(){
       }
     }
     if (!onRock) {
-      EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
+      EarthBall e = new EarthBall(mouseX, mouseY, 0.3);//0.3 is the recommended co-effictient for aesthetics
       earthBalls.add(e);
       thingsToDisplay.add(e);
       thingsToMove.add(e);
       wasMousePressed = true;
     }
-   // if (onRock) {
-     // pressed.y -= 100;
+    // if (onRock) {
+    // pressed.y -= 100;
     //}
-  }
-  else if (mousePressed){
-     wasMousePressed = true;
-     //movedBall = false;
-  }
-  else{
+  } else if (mousePressed) {
+    wasMousePressed = true;
+    //movedBall = false;
+  } else {
     if (pressed != null) {
-    //  pressed.y -= 500;
+      //  pressed.y -= 500;
       pressed.addVerticalV();
       pressed = null;
-    //  movedBall = true;
+      //  movedBall = true;
     }
     wasMousePressed = false;
   }

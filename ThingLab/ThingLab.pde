@@ -265,19 +265,11 @@ class EarthBall extends Ball implements Displayable, Moveable {
         this.collide = true;
       }
     }
-   /* boolean rockTouch = false;
-    for (EarthBall e : earthBalls) {
-      if (abs(e.x-mouseX) <= 25 && abs(e.y-mouseY) <= 25) {
-        rockTouch = true;
-      }
-    }
-    if (wasPressed) {
-      y -= 50;
-      wasPressed = false;
-    }
-    if (mousePressed && rockTouch) {
-      wasPressed = true;
-    } */
+  }
+  
+  void addVerticalV() {
+    vy = 15;
+    diry = -1;
   }
 }
 
@@ -357,7 +349,8 @@ void createRocks(){
   }
   else{
     if (pressed != null) {
-      pressed.y -= 500;
+    //  pressed.y -= 500;
+      pressed.addVerticalV();
       pressed = null;
     //  movedBall = true;
     }

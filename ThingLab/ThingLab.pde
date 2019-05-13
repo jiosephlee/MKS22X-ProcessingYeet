@@ -29,7 +29,7 @@ class Thing implements Collideable {
   }
 }
 
-class Rock extends Thing implements Displayable{
+class Rock extends Thing implements Displayable {
   float size;
   PImage rock;
   Rock(float x, float y, PImage r) {
@@ -74,7 +74,7 @@ public class LivingRock extends Rock implements Moveable {
 
 
 
-  float z= 1.3;
+  float z= 1;
   float mouseXP = -1;
   float mouseYP = -1;
 
@@ -83,23 +83,23 @@ public class LivingRock extends Rock implements Moveable {
      x += z;
      }
      if ((y < 740) && (y > 10)){
-
+     
      y += g;
      }*/
-     if ((mouseX < 950) && (mouseY > 10) && (mouseX != mouseXP || x > mouseX + 10 || x < mouseX - 10)){
-       if (mouseX > x) {
-         x += z;
-       } else {
-         x -= z;
-       }
-     }
-     if ((mouseY < 740) && (mouseY > 10) && (mouseY != mouseYP || y > mouseY + 10 || y < mouseY - 10)) {
-       if (mouseY > y) {
-         y += z;
-       } else {
-         y -= z;
-       }
-     }
+    if ((mouseX < 950) && (mouseY > 10) && (mouseX != mouseXP || x > mouseX + 7 || x < mouseX - 7)) {
+      if (mouseX > x) {
+        x += z;
+      } else {
+        x -= z;
+      }
+    }
+    if ((mouseY < 740) && (mouseY > 10) && (mouseY != mouseYP || y > mouseY + 7 || y < mouseY - 7)) {
+      if (mouseY > y) {
+        y += z;
+      } else {
+        y -= z;
+      }
+    }
     mouseXP = mouseX;
     mouseYP = mouseY;
     //if touching thing should go here for collisions but I don't know which other thing to use?
@@ -107,8 +107,8 @@ public class LivingRock extends Rock implements Moveable {
 }
 
 class Ball extends Thing implements Displayable, Moveable {
-  int velocity,dirx,diry;
-  float vx,vy;
+  int velocity, dirx, diry;
+  float vx, vy;
   boolean collide = false;
 
   Ball(float x, float y) {
@@ -116,14 +116,14 @@ class Ball extends Thing implements Displayable, Moveable {
     velocity = (int)random(2) + 2;
     vx = random(velocity-1)+1;
     vy = velocity*velocity - (vx*vx);
-    if(random(1) < 0.5){
+    if (random(1) < 0.5) {
       dirx = 1;
-    } else{
+    } else {
       dirx = -1;
     }
-    if(random(1) < 0.5){
+    if (random(1) < 0.5) {
       diry = 1;
-    } else{
+    } else {
       diry = -1;
     }
   }
@@ -133,7 +133,12 @@ class Ball extends Thing implements Displayable, Moveable {
   float bl = random(255);
 
   float size = random(30, 50);
-
+  void setdiry(int a) {
+    diry = a;
+  }
+  void setdirx(int a) {
+    dirx = a;
+  }
   void display() {
     noStroke();
     fill(r, g, bl);
@@ -141,7 +146,7 @@ class Ball extends Thing implements Displayable, Moveable {
   }
 
   void move() {
-    if((x > 960) || (x < 20)){
+    if ((x > 960) || (x < 20)) {
       dirx*=-1;
       x += vx * dirx;
       y += vy * diry;
@@ -149,7 +154,7 @@ class Ball extends Thing implements Displayable, Moveable {
       diry*=-1;
       x += vx * dirx;
       y += vy * diry;
-    } else{
+    } else {
       x += vx * dirx;
       y += vy * diry;
     }
@@ -163,6 +168,8 @@ class Ball extends Thing implements Displayable, Moveable {
     if (this.collide == true) {
       dirx*=-1;
       diry*=-1;
+      vx = (vx + random(velocity-1)+1)/2;
+      vy = velocity*velocity - (vx*vx);
       x += vx * dirx;
       y += vy * diry;
     }
@@ -177,28 +184,34 @@ class BBall extends Ball implements Displayable, Moveable {
     google = g;
   }
 
+  void fixcoordinates(ArrayList<Collideable> b) {
+    int count = 0;
+    for (Collideable r : b) {
+      if (r.isTouching(this)) {
+        x = (50+random(height-110));
+        y = (50+random(width-110));
+        count++;
+      }
+    }
+    if (count !=0) {
+      fixcoordinates(b);
+    } else {
+      return;
+    }
+  }
   void display() {
     if (collide) {
-      fill(255,0,0);
-      ellipse(x+25,y+25,50,50);
+      fill(255, 0, 0);
+      ellipse(x+25, y+25, 50, 50);
     } else {
-      image(google, x,y,50,50);
+      image(google, x, y, 50, 50);
     }
     collide = false;
   }
 
   void move() {
     super.move();
-    for (BBall b : beachBalls) {
-      if (b != this && b.isTouching(this)) {
-        dirx*=-1;
-        diry*=-1;
-        x += vx * dirx;
-        y += vy * diry;
-      }
-    }
   }
-
 }
 
 class EarthBall extends Ball implements Displayable, Moveable {
@@ -214,8 +227,8 @@ class EarthBall extends Ball implements Displayable, Moveable {
   }
   void display() {
     if (collide) {
-      fill(0,0,255);
-      ellipse(x,y, 50,50);
+      fill(0, 0, 255);
+      ellipse(x, y, 50, 50);
     } else {
       noStroke();
       fill(142, 100, 64);
@@ -225,11 +238,11 @@ class EarthBall extends Ball implements Displayable, Moveable {
   }
 
   void move() {
-    if (vy < 0.005 && y > 759){
+    if (vy < 0.005 && y > 759) {
       vy = 0;
       y = 760;
     }
-    if((x > 960) || (x < 20)){
+    if ((x > 960) || (x < 20)) {
       dirx*=-1;
       velocity+=9.91 * (millis()-time) / 1000;
       x += vx * dirx;
@@ -237,22 +250,22 @@ class EarthBall extends Ball implements Displayable, Moveable {
       time = millis();
     } else if ((y > 760) || (y < 20) || vy <= 0) {
       diry*=-1;
-      if (vy <= 0){
+      if (vy <= 0) {
         vy=9.91 * (millis()-time) / 1000;
         x += vx * dirx;
         y += vy * diry;
-      } else{
+      } else {
         x += vx * dirx;
         y += vy * diry;
         vy-=((9.81 + friction) * (millis()-time) / 1000) * (10/vy); // simulates air resistance but also creates the fast bouncing effect we see in earth
       }
       time = millis();
-    } else if (diry == 1){
+    } else if (diry == 1) {
       vy+=9.81 * (millis()-time) / 1000;
       x += vx * dirx;
       y += vy * diry;
       time = millis();
-    } else{
+    } else {
       vy-=(9.81 + friction )* (millis()-time) / 1000; // stimulates air resistance
       x += vx * dirx;
       y += vy * diry;
@@ -284,7 +297,7 @@ void setup() {
   thingsToMove = new ArrayList<Moveable>();
   ListOfCollideables = new ArrayList<Collideable>();
   beachBalls = new ArrayList<BBall>();
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 6; i++) {
     PImage rockimage;
     int n = (int)random(2);
     if (n == 1) rockimage = rock;
@@ -293,12 +306,13 @@ void setup() {
     thingsToDisplay.add(r);
     ListOfCollideables.add(r);
   }
-  for (int i = 0; i < 5; i++){
+  for (int i = 0; i < 5; i++) {
     BBall b = new BBall(50+random(width-110), 50+random(height-110), google);
+    b.fixcoordinates(ListOfCollideables);
     thingsToDisplay.add(b);
     thingsToMove.add(b);
     beachBalls.add(b);
-    EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
+    EarthBall e = new EarthBall(50+random(width-110), 50+random(height-110), 0.3);//0.3 is the recommended co-effictient for aesthetics
     thingsToDisplay.add(e);
     thingsToMove.add(e);
   }
@@ -310,19 +324,17 @@ void setup() {
 }
 
 boolean wasMousePressed = false;
-void createRocks(){
-  if (mousePressed && !wasMousePressed){
-      EarthBall e = new EarthBall(mouseX,mouseY,0.3);//0.3 is the recommended co-effictient for aesthetics
-      thingsToDisplay.add(e);
-      thingsToMove.add(e);
-      wasMousePressed = true;
-    }
-    else if (mousePressed){
-       wasMousePressed = true;
-    }
-    else{
-      wasMousePressed = false;
-    }
+void createRocks() {
+  if (mousePressed && !wasMousePressed) {
+    EarthBall e = new EarthBall(mouseX, mouseY, 0.3);//0.3 is the recommended co-effictient for aesthetics
+    thingsToDisplay.add(e);
+    thingsToMove.add(e);
+    wasMousePressed = true;
+  } else if (mousePressed) {
+    wasMousePressed = true;
+  } else {
+    wasMousePressed = false;
+  }
 }
 
 void draw() {

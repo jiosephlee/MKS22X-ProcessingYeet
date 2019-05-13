@@ -290,7 +290,7 @@ void setup() {
     thingsToDisplay.add(r);
     ListOfCollideables.add(r);
   }
-  EarthBall e = new EarthBall(100,100,0.3);
+  EarthBall e = new EarthBall(100,100,0.3); //0.3 is the recommended co-efficient for aesthetcs
   thingsToDisplay.add(e);
   thingsToMove.add(e);
   LivingRock m = new LivingRock(50+random(width-100), 50+random(height)-100, rock);

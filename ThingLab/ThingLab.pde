@@ -19,14 +19,14 @@ class Thing implements Collideable {
     this.y = y;
     size = s;
   }
-  
+
   boolean isTouching(Thing other) {
-    if (other.x <= (this.x + 50) && other.x >= (this.x - 50) 
+    if (other.x <= (this.x + 50) && other.x >= (this.x - 50)
       && other.y <= (this.y + 50) && other.y >= (this.y - 50)) {
       return true;
     }
     return false;
-  } 
+  }
   // if the distance between the two is smaller than half their sizes, they are overlapping
   //boolean isTouching(Thing other) {
     //return dist(this.x, this.y, other.x, other.y) <= (this.size + other.size) / 2;
@@ -36,12 +36,11 @@ class Thing implements Collideable {
 class Rock extends Thing implements Displayable{
   float size;
   PImage rock;
-  Rock(float x, float y) {
+  Rock(float x, float y, PImage r) {
     super(x, y, 20);
     size = 20;
-    int n = (int)random(2);
-    if (n==1) rock = loadImage("rock.png");
-    else rock = loadImage("rock1.png");
+
+    rock = r;
   }
 
 
@@ -50,13 +49,13 @@ class Rock extends Thing implements Displayable{
 
 
   void display() {
-   // image(rock, x, y, 50, 50);
-    fill(0);
-    ellipse(x, y, 50, 50);
+    image(rock, x, y, 50, 50);
+   // fill(0);
+   // ellipse(x, y, 50, 50);
   }
 
  // boolean isTouching(Thing other) {
-   // if (other.x <= (this.x + 25) && other.x >= (this.x - 25) 
+   // if (other.x <= (this.x + 25) && other.x >= (this.x - 25)
      // && other.y <= (this.y + 25) && other.y >= (this.y - 25)) {
       //return true;
     //}
@@ -69,21 +68,21 @@ public class LivingRock extends Rock implements Moveable {
   int[] xChanges = new int[] { 5, 0, -10, 0 };
   int[] yChanges = new int[] { 0, 5, 0, -10 };
 
-  LivingRock(float x, float y) {
-    super(x, y);
+  LivingRock(float x, float y, PImage r) {
+    super(x, y, r);
   }
 
   void display() {
     super.display();
     fill(255);
-    ellipse(x-15, y, 20, 20);
-    ellipse(x+15, y, 15, 15);
+    ellipse(x+5, y+20, 20, 20);
+    ellipse(x+30, y+20, 15, 15);
     fill(eyeColors[0], eyeColors[1], eyeColors[2]);
-    ellipse(x-15, y, 10, 10);
-    ellipse(x+15, y, 10, 10);
+    ellipse(x+5, y+20, 10, 10);
+    ellipse(x+30, y+20, 10, 10);
     fill(0);
-    ellipse(x-13, y, 7, 7);
-    ellipse(x+13, y, 7, 7);
+    ellipse(x+7, y+20, 7, 7);
+    ellipse(x+30, y+20, 7, 7);
   }
 
 
@@ -98,9 +97,9 @@ public class LivingRock extends Rock implements Moveable {
      x += z;
      }
      if ((y < 740) && (y > 10)){
-     
+
      y += g;
-     }*/  
+     }*/
      if ((mouseX < 950) && (mouseY > 10) && (mouseX != mouseXP || x > mouseX + 10 || x < mouseX - 10)){
        if (mouseX > x) {
          x += z;
@@ -125,7 +124,7 @@ class Ball extends Thing implements Displayable, Moveable {
   int velocity,dirx,diry;
   float vx,vy;
   boolean collide = false;
-  
+
   Ball(float x, float y) {
     super(x, y, 20);
     velocity = (int)random(2) + 2;
@@ -168,7 +167,7 @@ class Ball extends Thing implements Displayable, Moveable {
       x += vx * dirx;
       y += vy * diry;
     }
-    
+
     for (Collideable c : ListOfCollideables) {
       if (c.isTouching(this)) {
         this.collide = true;
@@ -179,12 +178,14 @@ class Ball extends Thing implements Displayable, Moveable {
 
 class BBall extends Ball implements Displayable, Moveable {
 
-  BBall (float x, float y) {
+  PImage google;
+  BBall (float x, float y, PImage g) {
     super(x, y);
+    google = g;
   }
-  
-  PImage google = loadImage("ball.png");
-  
+
+  //PImage google = loadImage("ball.png");
+
   void display() {
     if (collide) {
       fill(255,0,0);
@@ -198,7 +199,7 @@ class BBall extends Ball implements Displayable, Moveable {
   void move() {
     super.move();
   }
-  
+
 }
 
 class EarthBall extends Ball implements Displayable, Moveable {
@@ -269,22 +270,26 @@ ArrayList<Collideable> ListOfCollideables;
 
 void setup() {
   size(1000, 800);
-
+  PImage rock;
+  PImage google = loadImage("ball.png");
+  int n = (int)random(2);
+  if (n==1) rock = loadImage("rock.png");
+  else rock = loadImage("rock1.png");
   thingsToDisplay = new ArrayList<Displayable>();
   thingsToMove = new ArrayList<Moveable>();
   ListOfCollideables = new ArrayList<Collideable>();
   for (int i = 0; i < 10; i++) {
-    BBall b = new BBall(50+random(width-110), 50+random(height-110));
+    BBall b = new BBall(50+random(width-110), 50+random(height-110), google);
     thingsToDisplay.add(b);
     thingsToMove.add(b);
-    Rock r = new Rock(50+random(width-110), 50+random(height-110));
+    Rock r = new Rock(50+random(width-110), 50+random(height-110), rock);
     thingsToDisplay.add(r);
     ListOfCollideables.add(r);
   }
   EarthBall e = new EarthBall(100,100);
   thingsToDisplay.add(e);
   thingsToMove.add(e);
-  LivingRock m = new LivingRock(50+random(width-100), 50+random(height)-100);
+  LivingRock m = new LivingRock(50+random(width-100), 50+random(height)-100, rock);
   thingsToDisplay.add(m);
   thingsToMove.add(m);
   ListOfCollideables.add(m);

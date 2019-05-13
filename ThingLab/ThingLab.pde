@@ -313,7 +313,7 @@ void setup() {
 boolean wasMousePressed = false;
 void createRocks(){
   if (mousePressed && !wasMousePressed){
-      EarthBall e = new EarthBall(50+random(width-110),50+random(height-110),0.3);//0.3 is the recommended co-effictient for aesthetics
+      EarthBall e = new EarthBall(mouseX,mouseY,0.3);//0.3 is the recommended co-effictient for aesthetics
       thingsToDisplay.add(e);
       thingsToMove.add(e);
       wasMousePressed = true;

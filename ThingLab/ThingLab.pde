@@ -74,8 +74,7 @@ public class LivingRock extends Rock implements Moveable {
 
 
 
-  float z= random(0, 10);
-  float g = random(0, 10);
+  float z= 1.3;
   float mouseXP = -1;
   float mouseYP = -1;
 
